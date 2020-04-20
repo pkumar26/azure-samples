@@ -62,21 +62,21 @@
     # Enable network policy by using the `--network-policy` parameter
     az aks create \
         --name $CLUSTER_NAME \
-	    --resource-group $RG_NAME \
+        --resource-group $RG_NAME \
         --vm-set-type VirtualMachineScaleSets \
         --node-count 3 \
-	    --generate-ssh-keys \
+        --generate-ssh-keys \
         --load-balancer-sku standard \
         --network-plugin $NETWORK_PLUGIN \
         --enable-cluster-autoscaler \
         --min-count 3 \
         --max-count 6 \
-	    --service-cidr 10.0.0.0/16 \
-	    --dns-service-ip 10.0.0.10 \
-	    --docker-bridge-address 172.17.0.1/16 \
-	    --vnet-subnet-id $SUBNET1_ID \
-	    --service-principal $SP_ID \
-	    --client-secret $SP_PASSWORD
+        --service-cidr 10.0.0.0/16 \
+        --dns-service-ip 10.0.0.10 \
+        --docker-bridge-address 172.17.0.1/16 \
+        --vnet-subnet-id $SUBNET1_ID \
+        --service-principal $SP_ID \
+        --client-secret $SP_PASSWORD
 
     # Attach ACR
     az aks update -n $CLUSTER_NAME -g $RG_NAME --attach-acr $ACR_NAME
@@ -86,9 +86,9 @@
 
     # Update cluster to use custom IP for outbound access
     az aks update \
-    --resource-group $RG_NAME \
-    --name $CLUSTER_NAME \
-    --load-balancer-outbound-ips $EGRESS_ID
+        --resource-group $RG_NAME \
+        --name $CLUSTER_NAME \
+        --load-balancer-outbound-ips $EGRESS_ID
 
     # Assign the service principal Owner permissions to the virtual network resource
     az role assignment create --assignee $SP_ID --scope $EGRESS_ID --role Owner
