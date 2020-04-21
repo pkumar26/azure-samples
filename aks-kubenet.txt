@@ -94,4 +94,4 @@
     az role assignment create --assignee $SP_ID --scope $EGRESS_ID --role Owner
 
     # Get credentials to login
-    az aks get-credentials --resource-group $RESOURCE_GROUP_NAME --name $CLUSTER_NAME
+    az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME
