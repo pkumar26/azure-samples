@@ -68,6 +68,7 @@
         --generate-ssh-keys \
         --load-balancer-sku standard \
         --network-plugin $NETWORK_PLUGIN \
+        --network-policy $NETWORK_POLICY \
         --enable-cluster-autoscaler \
         --min-count 3 \
         --max-count 6 \
