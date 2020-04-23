@@ -1,5 +1,5 @@
 ## AKS Cluster in your own VNet (Kubenet + Calico)
-
+****
 **Setup environment variables**
 
     RG_NAME=""
@@ -113,3 +113,11 @@
 **Get credentials to login**
 
     az aks get-credentials --resource-group $RG_NAME --name $CLUSTER_NAME
+
+**Create ClusterRoleBinding before you can correctly access the dashboard**
+
+    kubectl create clusterrolebinding kubernetes-dashboard --clusterrole=cluster-admin --serviceaccount=kube-system:kubernetes-dashboard
+
+**Browse AKS dashboard**
+
+    az aks browse --resource-group $RG_NAME --name $CLUSTER_NAME
