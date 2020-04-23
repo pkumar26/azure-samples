@@ -44,7 +44,7 @@
 **Create PublcIP for Egress**
 
     az network public-ip create \
-        --name $EGRESS_PUBIP_WEST \
+        --name $EGRESS_PUBIP \
         --sku standard \
         --resource-group $RG_NAME
 
