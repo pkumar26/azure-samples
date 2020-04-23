@@ -1,5 +1,5 @@
 ## AKS Cluster in your own VNet (Kubenet + Calico)
-****
+
 **Setup environment variables**
 
     RG_NAME=""
