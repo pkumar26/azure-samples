@@ -91,6 +91,7 @@
         --vm-set-type VirtualMachineScaleSets \
         --node-vm-size $VM_SIZE \
         --node-count 3 \
+        --zones 1 2 3 \
         --nodepool-name nodepool00 \
         --enable-cluster-autoscaler \
         --generate-ssh-keys \
@@ -109,6 +110,7 @@
         --attach-acr $ACR_NAME \
         --enable-addons monitoring \
         --workspace-resource-id $LA_WORKSPACE_ID
+>--zones will work in regions where zones are supported. Make sure that your region support zones https://docs.microsoft.com/en-us/azure/availability-zones/az-region
 
 **Get credentials to login**
 
