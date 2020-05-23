@@ -123,3 +123,10 @@
 **Browse AKS dashboard**
 
     az aks browse --resource-group $RG_NAME --name $CLUSTER_NAME
+
+**Verify outgoing IP of your cluster**
+
+    kubectl run -it --rm aks-ip --image=debian --generator=run-pod/v1
+    apt-get update && apt-get install curl -y
+    curl -s checkip.dyndns.org
+>IP should match the EGRESS IP of the cluster
