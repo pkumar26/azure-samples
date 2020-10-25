@@ -2,7 +2,7 @@
 
 **Get Linkerd CLI and setup your environment**
 
-    LINKERD_VERSION=stable-2.7.1
+    LINKERD_VERSION=stable-2.8.1
     curl -sLO "https://github.com/linkerd/linkerd2/releases/download/$LINKERD_VERSION/linkerd2-cli-$LINKERD_VERSION-linux"
     sudo cp ./linkerd2-cli-$LINKERD_VERSION-linux /usr/local/bin/linkerd
     sudo chmod +x /usr/local/bin/linkerd
@@ -48,7 +48,7 @@
 
 **If needed enable linkerd sidecar injection in already created namespace and/ or deployment**
 
-    kubectl get ns <namespacename> -o yaml | linkerd inject - | kubectl apply -f -
+    kubectl annotate namespace <namespace> linkerd.io/inject=enabled
     kubectl get deploy -o yaml -n <namespace> | linkerd inject - | kubectl apply -f -
 
 **Install sample booksapp**
@@ -64,4 +64,32 @@
 
     kubectl -n demo port-forward svc/webapp 7000 &
 
+
+    real-time live traffic analysis
+    linkerd tap deploy/web
+
+     monitor a Kubernetes deployment
+     linkerd top deploy/web
+
+
+    check the TLS status of traffic:
+    linkerd tap deploy -n demo
+    linkerd tap deploy/webapp -n demo | grep -C2 status=500
+
+    check service profile crd:
+    kubectl -n linkerd get crd | grep -i linkerd
+
+    look at the routes that Linkerd discovered
+    linkerd -n demo routes services
+
+    linkerd profile --template webapp -n demo > webapp.yaml
+        edit webapp.yaml
+    kubectl apply -f webapp.yaml -n demo
+    linkerd -n demo routes services/webapp
+
 ****
+    linkerd top deploy/traffic --namespace demo --to deploy/webapp --to-namespace demo --path /books --hide-sources
+
+    kubectl create -f https://k8s.io/examples/admin/dns/busybox.yaml
+
+    kubectl run -it --rm virtual-node-test --image=debian
